@@ -1,9 +1,5 @@
 import 'package:dio/dio.dart';
 
-// baseUrl = 'https://newsapi.org/'
-// method = 'v2/top-headlines'
-// queries = 'country=eg&category=business&apiKey=973fb8bb839246adbd5e6401e0154226'
-
 class DioHelper {
   static Dio? dio;
 
@@ -17,9 +13,14 @@ class DioHelper {
   }
 
   static Future<Response> getData({
-    required String url,
-    required Map<String, dynamic> query,
+    required String country,
+    required String category,
   }) async {
-    return await dio!.get(url, queryParameters: query);
+    Map<String, String> query = {
+      'country': country,
+      'category': category,
+      'apiKey': '973fb8bb839246adbd5e6401e0154226',
+    };
+    return await dio!.get('v2/top-headlines', queryParameters: query);
   }
 }

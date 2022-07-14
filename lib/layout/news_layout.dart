@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/shared/components/theme_cubit/theme_cubit.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/shared/components/theme/theme_cubit/theme_cubit.dart';
 
 class NewsLayout extends StatelessWidget {
   const NewsLayout({Key? key}) : super(key: key);
@@ -22,21 +22,16 @@ class NewsLayout extends StatelessWidget {
                 icon: const Icon(Icons.search),
               ),
               IconButton(
-                onPressed: () {
-                  //changeAppMode();
-                  ThemeCubit.get(context).changeAppMode();
-                },
+                onPressed: () => ThemeCubit.get(context).changeAppMode(),
                 icon: const Icon(Icons.brightness_4_outlined),
               ),
             ],
           ),
           body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: cubit.currentIndex,
-            onTap: (index) {
-              cubit.changeBottomNavBar(index);
-            },
             items: cubit.bottomItems,
+            currentIndex: cubit.currentIndex,
+            onTap: (index) => cubit.changeBottomNavBar(index),
           ),
         );
       },
